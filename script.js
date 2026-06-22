@@ -1,4 +1,4 @@
-// STARFIELD ANIMATION ENGINE
+// STARFIELD BACKGROUND ANIMATION ENGINE
 const canvas = document.getElementById('starfield');
 const ctx = canvas.getContext('2d');
 let stars = [];
@@ -16,7 +16,7 @@ function initStars() {
             y: Math.random() * canvas.height,
             r: Math.random() * 1.6 + 0.2,
             o: Math.random() * 0.6 + 0.1,
-            speed: Math.random() * 0.012 + 0.003,
+            speed: Math.random() * 0.006 + 0.002, // Kept at slow, non-distracting pace
             phase: Math.random() * Math.PI * 2
         });
     }
@@ -28,41 +28,32 @@ function draw(t) {
         const op = s.o * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(200, 215, 255, ${op})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${op})`; // Brightened to pure glowing white
         ctx.fill();
     });
     requestAnimationFrame(draw);
 }
 
-// Event Listeners for Starfield
 resize();
 initStars();
 requestAnimationFrame(draw);
+
 window.addEventListener('resize', () => {
     resize();
     initStars();
 });
 
-// INTERACTIVE PROJECT TAB SWITCHER
-function showTab(tabId, event) {
-    // Hide all project grid panels
-    document.querySelectorAll('.proj-panel').forEach(panel => {
-        panel.classList.remove('active');
-    });
+// INTERACTIVE PROJECT TAB SWITCHER ENGINE
+function showTab(tab) {
+    document.querySelectorAll('.proj-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     
-    // Deactivate all tab control buttons
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    
-    // Display the targeted grid panel
-    const targetPanel = document.getElementById('tab-' + tabId);
+    const targetPanel = document.getElementById('tab-' + tab);
     if (targetPanel) {
         targetPanel.classList.add('active');
     }
     
-    // Set clicked button state to active
-    if (event && event.target) {
-        event.target.classList.add('active');
+    if (window.event && window.event.target) {
+        window.event.target.classList.add('active');
     }
 }
