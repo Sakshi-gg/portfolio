@@ -17,8 +17,8 @@
     --dim: #64748b;
     --card: rgba(13, 17, 48, 0.88);
     --border: rgba(139, 92, 246, 0.18);
-    --mono: 'Orbitron', monospace;
-    --sans: 'Rajdhani', sans-serif;
+    --mono: 'Inter', sans-serif;
+    --sans: 'Inter', sans-serif;
 }
 
 html {
@@ -48,7 +48,7 @@ body {
 canvas {
     position: fixed;
     inset: 0;
-    z-index: 0;
+    z-index: -1;
     pointer-events: none;
 }
 
